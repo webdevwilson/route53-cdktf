@@ -4,35 +4,34 @@ accounts:
     region: us-east-1
     assumeRole:
       - roleArn: 'arn:aws:iam::<account id>:role/<role name>'
-  - alias: qa
+  - alias: prod
     region: us-east-1
     assumeRole:
       - roleArn: 'arn:aws:iam::<account id>:role/<role name>'
-  - alias: prod
-    region: us-east-1
 zones:
   - name: domain.com
     account: prod
     records: # example of adding records from here
       - name: www.domain.com
         type: A
+        ttl: 300
         records:
           - 127.0.0.1
     zones: # subdomains declared under root domain, nest indefinitely
-      - name: qa.domain.com
-        account: qa
       - name: dev.domain.com
         account: dev
         records:
           - name: dev.domain.com
             type: A
+            ttl: 300
             records:
               - 127.0.0.1
         zones:
           - name: future.dev.domain.com
             account: dev
             records:
-              - name: future.dev.domain.com
-                type: A
+              - name: current.future.dev.domain.com
+                type: CNAME
+                ttl: 300
                 records:
-                  - 127.0.0.1
+                  - dev.domain.com

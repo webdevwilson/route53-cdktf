@@ -1,9 +1,10 @@
-# r53-cdktf
+# route53-cdktf
 
 An example of how to manage complex DNS structures using CDK for Terraform.
 
-## Setup
+[View Blog Post](https://kerrywilson.dev/post/2021/08-12-managing-route53-dns-with-terraform-and-cdk/)
 
+## Setup
 * Install [nodejs](https://nodejs.org/) via [nvm](https://github.com/nvm-sh/nvm)
 * Run `nvm install 12`
 * Install [Terraform](https://terraform.io) via [tfenv](https://github.com/tfutils/tfenv)

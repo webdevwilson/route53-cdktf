@@ -48,6 +48,7 @@ class MyStack extends TerraformStack {
       ...{
         provider: this.awsProviders[zoneConfig.account],
         zones: [],
+        records: [],
       },
       ...zoneConfig,
     }
@@ -66,6 +67,17 @@ class MyStack extends TerraformStack {
       })
     }
     zoneConfig.zones.forEach((z) => this.createZone(zone, z))
+    zoneConfig.records.forEach((r) => {
+      const recordId = `${zone.id}_${r.name.replace('.', '_')}_${r.type}`
+      const record = {
+        ...r,
+        ...{
+          provider: zone.provider,
+          zoneId: zone.zoneId,
+        },
+      }
+      new Route53Record(this, recordId, record)
+    })
   }
 }
 
